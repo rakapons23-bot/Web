@@ -62,7 +62,7 @@ const playlist = [
   {
     type: 'html5',
     // Bertobatlah masih - jemox83 (local file)
-    src: 'Audio/Bertobatlah masih , jemox83 #shorts.mp3',
+    src: 'Audio/Bertobatlah%20masih%20%2C%20jemox83%20%23shorts.mp3',
     title: '🎵 Bertobatlah masih - jemox83'
   }
 ];
@@ -212,7 +212,7 @@ const runawayPhrases = [
   "7/10: Ayo kejar terus jangan kasih kendor! 🏃‍♀️💨",
   "8/10: Okey okey, kali ini serius... eh tapi boong! 🤪",
   "9/10: Satu kali klik lagi Kak Butas! Tahan emosi! 🌋",
-// 10/10: HORE! Berhasil! Klik tombolnya sekali lagi untuk klaim kado! 🎉 (removed per user request)
+  // 10/10: HORE! Berhasil! Klik tombolnya sekali lagi untuk klaim kado! 🎉 (removed per user request)
 ];
 
 /* ==========================================================================
@@ -222,7 +222,7 @@ const runawayPhrases = [
 btnOpenInvitation.addEventListener('click', () => {
   // Fade out cover page
   coverPage.classList.add('hidden');
-  
+
   // Show navigation and floating music widget
   setTimeout(() => {
     mainNav.classList.add('visible');
@@ -233,7 +233,7 @@ btnOpenInvitation.addEventListener('click', () => {
 
   // Start the 3-song playlist
   startPlaylist();
-  
+
   // Start generating balloons
   setInterval(createBalloon, 1500);
   for (let i = 0; i < 5; i++) {
@@ -248,22 +248,22 @@ btnOpenInvitation.addEventListener('click', () => {
 function createBalloon() {
   const balloon = document.createElement('div');
   balloon.classList.add('floating-balloon');
-  
+
   // Random configurations
   const color = colors[Math.floor(Math.random() * colors.length)];
   const size = Math.random() * 25 + 30; // 30px to 55px
   const left = Math.random() * 95; // 0% to 95% width
   const duration = Math.random() * 8 + 8; // 8s to 16s
-  
+
   balloon.style.backgroundColor = color;
   balloon.style.width = `${size}px`;
   balloon.style.height = `${size * 1.3}px`;
   balloon.style.left = `${left}%`;
   balloon.style.animationDuration = `${duration}s`;
-  
+
   // Custom triangle background matching balloon color
   balloon.style.setProperty('--balloon-color', color);
-  
+
   // Add dynamic triangle style
   const styleEl = document.createElement('style');
   styleEl.innerHTML = `
@@ -274,7 +274,7 @@ function createBalloon() {
   document.head.appendChild(styleEl);
 
   balloonContainer.appendChild(balloon);
-  
+
   // Remove balloon after animation completes
   setTimeout(() => {
     balloon.remove();
@@ -288,11 +288,11 @@ function createBalloon() {
 
 function triggerSectionAnimations() {
   const scrollPos = window.scrollY + window.innerHeight * 0.75;
-  
+
   sections.forEach(sec => {
     if (scrollPos > sec.offsetTop) {
       sec.classList.add('visible');
-      
+
       // Skill bar animation inside profile
       if (sec.id === 'profile') {
         const skillBars = sec.querySelectorAll('.skill-bar-fill');
@@ -302,7 +302,7 @@ function triggerSectionAnimations() {
       }
     }
   });
-  
+
   // Update Active Link in Nav
   let currentSec = "";
   sections.forEach(sec => {
@@ -355,11 +355,11 @@ function relocateRunawayButton() {
   const areaHeight = gameArea.clientHeight;
   const btnWidth = runawayBtn.clientWidth;
   const btnHeight = runawayBtn.clientHeight;
-  
+
   // Compute safe random positions inside parent area bounds
   const newLeft = Math.random() * (areaWidth - btnWidth - 30) + 15;
   const newTop = Math.random() * (areaHeight - btnHeight - 30) + 15;
-  
+
   runawayBtn.style.left = `${newLeft}px`;
   runawayBtn.style.top = `${newTop}px`;
 }
@@ -377,13 +377,13 @@ function handleRunawayInteraction(e) {
 
   // Increment clicks
   runawayClicks++;
-  
+
   // Update progress
   const progressPercent = (runawayClicks / targetClicks) * 100;
   progressFill.style.width = `${progressPercent}%`;
   progressLabel.textContent = `Kesabaran Kakak Butas: ${runawayClicks}/${targetClicks}`;
   challengeMsg.textContent = runawayPhrases[runawayClicks];
-  
+
   if (runawayClicks < targetClicks) {
     relocateRunawayButton();
     // Tiny scale animation on relocation
@@ -423,7 +423,7 @@ candles.forEach(candle => {
   candle.addEventListener('click', () => {
     if (!candle.classList.contains('blown')) {
       candle.classList.add('blown');
-      
+
       // Check if all candles blown
       const allBlown = Array.from(candles).every(c => c.classList.contains('blown'));
       if (allBlown) {
@@ -456,11 +456,11 @@ function getWishes() {
 function renderWishes() {
   const wishes = getWishes();
   wishesContainer.innerHTML = '';
-  
+
   wishes.forEach(w => {
     const card = document.createElement('div');
     card.classList.add('sticky-note');
-    
+
     card.innerHTML = `
       <p class="sticky-text">"${w.content}"</p>
       <p class="sticky-author">- ${w.author}</p>
@@ -471,21 +471,21 @@ function renderWishes() {
 
 wishForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  
+
   const authorVal = wishAuthor.value.trim();
   const contentVal = wishContent.value.trim();
-  
+
   if (authorVal && contentVal) {
     const wishes = getWishes();
     wishes.unshift({ author: authorVal, content: contentVal }); // Add to top
-    
+
     localStorage.setItem('kakak_butas_wishes', JSON.stringify(wishes));
     renderWishes();
-    
+
     // Reset inputs
     wishAuthor.value = '';
     wishContent.value = '';
-    
+
     // Sparkle effect
     triggerConfetti(3);
   }
@@ -542,14 +542,14 @@ function triggerConfetti(intensity = 5) {
   const count = intensity * 15;
   const startX = window.innerWidth / 2;
   const startY = window.innerHeight * 0.8; // burst from lower center
-  
+
   for (let i = 0; i < count; i++) {
     particles.push(new ConfettiParticle(
       startX + (Math.random() * 100 - 50),
       startY
     ));
   }
-  
+
   if (!confettiActive) {
     confettiActive = true;
     animateConfetti();
@@ -558,16 +558,16 @@ function triggerConfetti(intensity = 5) {
 
 function animateConfetti() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
+
   for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
     particles[i].draw();
-    
+
     if (particles[i].life <= 0 || particles[i].y > canvas.height) {
       particles.splice(i, 1);
     }
   }
-  
+
   if (particles.length > 0) {
     requestAnimationFrame(animateConfetti);
   } else {
