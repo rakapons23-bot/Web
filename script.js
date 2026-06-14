@@ -62,7 +62,7 @@ const playlist = [
   {
     type: 'html5',
     // Bertobatlah masih - jemox83 (local file)
-    src: 'Audio/Bertobatlah%20masih%20%2C%20jemox83%20%23shorts.mp3',
+    src: 'Audio/Bertobatlah masih , jemox83 #shorts.mp3',
     title: '🎵 Bertobatlah masih - jemox83'
   }
 ];
